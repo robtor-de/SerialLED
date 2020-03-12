@@ -31,8 +31,8 @@ void fadeTo(short r, short g, short b, int duration) {
 
 
   scale[0] = scale8_video_LEAVING_R1_DIRTY(1, diff[0]);
-  scale[1] = scale8_video_LEAVING_R1_DIRT(1, diff[1]);
-  scale[2] = scale8_video_LEAVING_R1_DIRT(1, diff[2]);
+  scale[1] = scale8_video_LEAVING_R1_DIRTY(1, diff[1]);
+  scale[2] = scale8_video_LEAVING_R1_DIRTY(1, diff[2]);
   cleanup_R1();
 
   dur_step = duration*1000/256.0;
