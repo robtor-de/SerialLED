@@ -42,9 +42,9 @@ void fadeTo(short r, short g, short b, int duration) {
     if(leds[0].r < 255 && leds[0].r > 0)
       (diff[0] >= 0)? leds[0].r += scale[0] : leds[0].r -= scale[0];
     if(leds[0].g < 255 && leds[0].g > 0)
-      leds[0].g += scale[1];
+      (diff[1] >= 0)? leds[0].g += scale[1] : leds[0].g -= scale[1];
     if(leds[0].b < 255 && leds[0].b > 0)
-      leds[0].b += scale[2];
+      (diff[2] >= 0)? leds[0].b += scale[2] : leds[0].b -= scale[2];
     FastLED.show();
     delay(dur_step);
   }
