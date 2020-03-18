@@ -39,9 +39,9 @@ void fadeTo(short r, short g, short b, int duration) {
 
   for(int i = 0; i < 255; i++) {
     //if is necessary to prevent overflow
-    if(leds[0].r > 0 && leds[0].r < 255 && (i%scale[0])==0) (scale[0] > 0)? leds[0].r += 1 : leds[0].r -= 1;
-    if(leds[0].g > 0 && leds[0].g < 255 && (i%scale[1])==0) (scale[1] > 0)? leds[0].g += 1 : leds[0].g -= 1;
-    if(leds[0].b > 0 && leds[0].b < 255 && (i%scale[2])==0) (scale[2] > 0)? leds[0].b += 1 : leds[0].b -= 1;
+    if((i%scale[0])==0) if(scale[0] > 0 && leds[0].r < 255) leds[0].r += 1; if(scale[0] < 0 && leds[0].r > 0) leds[0].r -= 1;
+    if((i%scale[1])==0) if(scale[1] > 0 && leds[0].g < 255) leds[0].g += 1; if(scale[1] < 0 && leds[0].g > 0) leds[0].g -= 1;
+    if((i%scale[2])==0) if(scale[2] > 0 && leds[0].b < 255) leds[0].b += 1; if(scale[2] < 0 && leds[0].b > 0) leds[0].b -= 1;
     FastLED.show();
     delay(dur_step);
   }
