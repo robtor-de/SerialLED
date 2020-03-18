@@ -58,13 +58,13 @@ void strobe(short r, short g, short b, int duration) {
   leds[0] = CRGB::Black;
   FastLED.show();
   delay(duration);
-  leds[0] = old_color();
+  leds[0] = old_color;
   FastLED.show();
 }
 
 //Save current state and pulse in another Color
 void pulse(short r, short g, short b, int duration) {
-  CRG old_color = leds[0];
+  CRGB old_color = leds[0];
   fadeTo(r, g, b, duration);
   fadeTo(old_color.r, old_color.g, old_color.b, duration);
 }
