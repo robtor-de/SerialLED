@@ -27,4 +27,4 @@ Byte0  | Funktion
 00000001  |  Farbe auf RGB einstellen, **data** hat keine funktion
 00000010  |  Fading zu RGB, **data** ist der Übergangsintervall (in Hundertstel Sekunden)
 00000100  |  Strobe in RGB, **data** ist die Blinkdauer (1x)
-00001000  |  
+00001000  |  Pulse in RGB, **data** ist die Einblendedauer (Gesamtdauer = **data** *2)
