@@ -15,6 +15,8 @@ void serialEvent() {
           switch(data[0]) {
             case B00000001: setColor(data[1], data[2], data[3]); Serial.write(0); break;
             case B00000010: fadeTo(data[1], data[2], data[3], data[4]); Serial.write(0); break;
+            case B00000100: strobe(data[1], data[2], data[3], data[4]); Serial.write(0); break;
+            case B00001000: pulse(data[1], data[2], data[3], data[4]); Serial.write(0); break;
           }
         } else {
           //return 1 as error code when check failed
