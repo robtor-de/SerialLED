@@ -1,7 +1,7 @@
 #include <FastLED.h>
 
 #define DATA_PIN 3
-#define CLK_PIN 13
+#define CLK_PIN 2
 #define FADETIME_MULTIPLIER_MS 100
 #define STROBETIME_MULTIPLIER_MS 10
 
@@ -39,9 +39,9 @@ void fadeTo(short r, short g, short b, int duration) {
 
   for(int i = 0; i < 255; i++) {
     //if is necessary to prevent overflow
-    if((i%scale[0])==0) (scale[0] > 0)? leds[0].r += 1 : leds[0].r -= 1;
-    if((i%scale[1])==0) (scale[1] > 0)? leds[0].g += 1 : leds[0].g -= 1;
-    if((i%scale[2])==0) (scale[2] > 0)? leds[0].b += 1 : leds[0].b -= 1;
+    if(leds[0].r > 0 && leds[0].r < 255 && (i%scale[0])==0) (scale[0] > 0)? leds[0].r += 1 : leds[0].r -= 1;
+    if(leds[0].g > 0 && leds[0].g < 255 && (i%scale[1])==0) (scale[1] > 0)? leds[0].g += 1 : leds[0].g -= 1;
+    if(leds[0].b > 0 && leds[0].b < 255 && (i%scale[2])==0) (scale[2] > 0)? leds[0].b += 1 : leds[0].b -= 1;
     FastLED.show();
     delay(dur_step);
   }
