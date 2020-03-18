@@ -3,6 +3,7 @@
 #define DATA_PIN 3
 #define CLK_PIN 13
 #define FADETIME_MULTIPLIER_MS 100
+#define STROBETIME_MULTIPLIER_MS 10
 
 CRGB leds[1];
 
@@ -48,6 +49,7 @@ void fadeTo(short r, short g, short b, int duration) {
 
 //Save current state and strobe quickly in another color
 void strobe(short r, short g, short b, int duration) {
+  duration *= STROBETIME_MULTIPLIER_MS;
   CRGB old_color = leds[0];
   leds[0] = CRGB::Black;
   FastLED.show();
