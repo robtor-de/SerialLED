@@ -31,9 +31,10 @@ void fadeTo(short r, short g, short b, int duration) {
   diff[1] = g - leds[0].g;
   diff[2] = b - leds[0].b;
 
-  scale[0] = 255/diff[0];
-  scale[1] = 255/diff[1];
-  scale[2] = 255/diff[2];
+  (diff[0] != 0)? scale[0] = 255/diff[0] : scale[0] = 0;
+  (diff[1] != 0)? scale[1] = 255/diff[0] : scale[1] = 0;
+  (diff[2] != 0)? scale[2] = 255/diff[0] : scale[2] = 0;
+
 
   dur_step = (duration*FADETIME_MULTIPLIER_MS)/256;
 
