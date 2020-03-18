@@ -2,6 +2,7 @@
 
 #define DATA_PIN 3
 #define CLK_PIN 13
+#define FADETIME_MULTIPLIER_MS 100
 
 CRGB leds[1];
 
@@ -23,26 +24,23 @@ void setColor(short r, short g, short b) {
 //Fade to other color within duration
 void fadeTo(short r, short g, short b, int duration) {
   short diff[3];
-  uint8_t scale[3], dur_step;
+  short scale[3];
+  int dur_step;
   diff[0] = r - leds[0].r;
   diff[1] = g - leds[0].g;
   diff[2] = b - leds[0].b;
 
+  scale[0] = 256/diff[0];
+  scale[1] = 256/diff[1];
+  scale[2] = 256/diff[2];
 
+  dur_step = (duration*FADETIME_MULTIPLIER_MS)/256;
 
-  scale[0] = scale8_video(1, diff[0]);
-  scale[1] = scale8_video(1, diff[1]);
-  scale[2] = scale8_video(1, diff[2]);
-
-  dur_step = duration*1000/256.0;
-
-  Serial.write(leds[0].r);
-
-  for(int i = 0; i < 256; i++) {
+  for(int i = 0; i < 255; i++) {
     //if is necessary to prevent overflow
-    if(diff[0] >= 0){ if(leds[0].r < 255) leds[0].r += scale[0]; if(leds[0].r > 0) leds[0].r -= scale[0]; }
-    if(diff[1] >= 0){ if(leds[0].g < 255) leds[0].g += scale[1]; if(leds[0].g > 0) leds[0].g -= scale[1]; }
-    if(diff[2] >= 0){ if(leds[0].b < 255) leds[0].b += scale[2]; if(leds[0].b > 0) leds[0].b -= scale[2]; }
+    if((i%scale[0])==0) (scale[0] > 0)? leds[0].r += 1 : leds[0].r -= 1;
+    if((i%scale[1])==0) (scale[1] > 0)? leds[0].g += 1 : leds[0].g -= 1;
+    if((i%scale[2])==0) (scale[2] > 0)? leds[0].b += 1 : leds[0].b -= 1;
     FastLED.show();
     delay(dur_step);
   }
