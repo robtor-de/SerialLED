@@ -1,6 +1,8 @@
 # Serial LED
 ## Funktion
 Dies ist eine Software für den Arduino Nano und zur Steuerung eines **P9813** LED Controllers
+Die Daten werden per serieller Schnittstelle an den Arduino Nano mit folgendem Protokoll übertragen
+
 
 ### Anschluss
 pin  |  function
@@ -11,10 +13,10 @@ pin  |  function
 ### Protokoll
 Daten werden in byte-Werten übergeben
 
-Byte0 | Byte1 | Byte2 | Byte3 | Byte4 | Byte5
-------|-------|-------|-------|-------|---------
-mode  | red   | green | blue  | data  | checksum
-      | 0-255 | 0-255 | 0-255 | 0-255 | r^g^b
+Byte0  |Byte1 | Byte2 | Byte3 | Byte4 | Byte5 | Byte6
+-------|------|-------|-------|-------|-------|---------
+255    |mode  | red   | green | blue  | data  | checksum
+       |      | 0-255 | 0-255 | 0-255 | 0-255 | r^g^b
 
 **Jedes gültige paket startet mit einem byte voller Einsen!**
 
